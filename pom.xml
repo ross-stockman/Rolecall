@@ -8,7 +8,7 @@
     <version>1.0</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>${project.common.name} Parent POM</description>
+    <description>${project.common.name}</description>
 
     <properties>
         <project.common.name>Rolecall</project.common.name>
@@ -17,9 +17,17 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jackson.version>2.19.1</jackson.version>
         <junit.version>5.13.3</junit.version>
     </properties>
+
+    <dependencies>
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement>
