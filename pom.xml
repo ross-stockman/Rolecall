@@ -129,8 +129,8 @@
                     <source>${java.version}</source>
                     <detectJavaApiLink>false</detectJavaApiLink>
                     <excludePackageNames>
-                        dev.stockman.jsonshield.test,
-                        dev.stockman.jsonshield.test.*
+                        dev.stockman.rolecall.test,
+                        dev.stockman.rolecall.test.*
                     </excludePackageNames>
                 </configuration>
                 <executions>
