@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.stockman</groupId>
+    <artifactId>rolecall</artifactId>
+    <version>1.0</version>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>${project.common.name} Parent POM</description>
+
+    <properties>
+        <project.common.name>Rolecall</project.common.name>
+        <github.repo>Rolecall</github.repo>
+        <java.version>25</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jackson.version>2.19.1</jackson.version>
+        <junit.version>5.13.3</junit.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.14.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.5.3</version>
+                    <configuration>
+                        <trimStackTrace>true</trimStackTrace>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.13</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.11.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>readme-md</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/docs</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>README.md</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <doclint>none</doclint>
+                    <source>${java.version}</source>
+                    <detectJavaApiLink>false</detectJavaApiLink>
+                    <excludePackageNames>
+                        dev.stockman.jsonshield.test,
+                        dev.stockman.jsonshield.test.*
+                    </excludePackageNames>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>aggregate</id>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+<!--                        <phase>site</phase>-->
+                        <configuration>
+                            <reportOutputDirectory>${project.basedir}/target/site</reportOutputDirectory>
+                            <doctitle>${project.common.name} API Documentation (${project.version})</doctitle>
+                            <windowtitle>${project.common.name} API</windowtitle>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <url>https://github.com/ross-stockman/${github.repo}</url>
+
+    <scm>
+        <connection>scm:git:git://github.com/ross-stockman/${github.repo}.git</connection>
+        <developerConnection>scm:git:ssh://github.com:ross-stockman/${github.repo}.git</developerConnection>
+        <url>https://github.com/ross-stockman/${github.repo}/tree/main</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/ross-stockman/${github.repo}/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>ross-stockman</id>
+            <name>Ross Stockman</name>
+            <url>https://github.com/ross-stockman</url>
+            <organizationUrl>https://github.com/ross-stockman</organizationUrl>
+            <properties>
+                <linkedin>https://linkedin.com/in/ross-stockman-5b755176</linkedin>
+                <twitter>https://twitter.com/rwstockman</twitter>
+            </properties>
+        </developer>
+    </developers>
+
+
+</project>
